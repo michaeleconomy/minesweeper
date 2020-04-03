@@ -131,6 +131,7 @@ MonoBehaviour:
   bombSprite: {fileID: 21300000, guid: 0c81cf5bb119b4cfc840e17d8ddb9e5f, type: 3}
   explodedSprite: {fileID: 21300000, guid: dc5a1792c100e4b08a0bfe88b48f4308, type: 3}
   flagSprite: {fileID: 21300000, guid: 6d8aebf3d5e934c2b881ae7813d69de1, type: 3}
+  explodedFlagSprite: {fileID: 21300000, guid: 5466d4f32e42a45f584cc967d1d8b3ab, type: 3}
   revealedSprites:
   - {fileID: 21300000, guid: 4e91e8b5a830e4c7c8ac421ada535e19, type: 3}
   - {fileID: 21300000, guid: eb9157740f7c241bcb497d365cace83b, type: 3}

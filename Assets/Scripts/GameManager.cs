@@ -42,12 +42,12 @@ public class GameManager : MonoBehaviour {
         new Difficulty {
             name = "Medium",
             size = new Vector2Int(10, 17),
-            bombs = 32
+            bombs = 24
         },
         new Difficulty {
             name = "Hard",
             size = new Vector2Int(10, 17),
-            bombs = 50
+            bombs = 36
         },
     };
 
@@ -92,12 +92,14 @@ public class GameManager : MonoBehaviour {
             }
         }
         var camera = Camera.main;
-        var widthSize = ( size.x * currentDifficulty.size.x) / (camera.aspect * 2);
-        var heightSize = ( size.y * currentDifficulty.size.y) / 2;
-        camera.orthographicSize = Mathf.Max(widthSize, heightSize);
         var canvas = Resources.FindObjectsOfTypeAll<Canvas>()[0];
         var height = (Screen.height - topBar.rect.height * canvas.scaleFactor) / Screen.height;
         camera.rect = new Rect(0, 0, 1, height);
+        var widthSize = ( size.x * currentDifficulty.size.x) / (camera.aspect * 2);
+        var heightSize = ( size.y * currentDifficulty.size.y) / 2;
+        Debug.Log("width size: " + widthSize +
+            " height size: " + heightSize);
+        camera.orthographicSize = Mathf.Max(widthSize, heightSize);
         playing = true;
     }
 
@@ -134,7 +136,8 @@ public class GameManager : MonoBehaviour {
     public void GameOver() {
         GameEnd();
         foreach (var square in squares.Values) {
-            square.Reveal(true);
+            square.revealed = true;
+            square.Refresh();
         }
     }
 
@@ -146,7 +149,7 @@ public class GameManager : MonoBehaviour {
         var existingScore = PlayerPrefs.GetFloat(currentDifficulty.name + "_score", float.MaxValue);
         if (time < existingScore) {
             PlayerPrefs.SetFloat(currentDifficulty.name + "_score", time);
-            DialogView.Prompt("New HighScore!");
+            DialogView.Prompt("New High Score!");
         }
     }
 

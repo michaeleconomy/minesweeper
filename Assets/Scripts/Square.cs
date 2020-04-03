@@ -9,7 +9,7 @@ public class Square : MonoBehaviour, IPointerClickHandler, IPointerDownHandler {
     public bool bomb, exploded, revealed, flagged;
     public int adjacent;
 
-    public Sprite startSprite, bombSprite, explodedSprite, flagSprite;
+    public Sprite startSprite, bombSprite, explodedSprite, flagSprite, explodedFlagSprite;
     public Sprite[] revealedSprites;
     public SpriteRenderer sr;
 
@@ -25,6 +25,14 @@ public class Square : MonoBehaviour, IPointerClickHandler, IPointerDownHandler {
     }
 
     public void Refresh() {
+        if (flagged) {
+            if (!revealed) {
+                sr.sprite = flagSprite;
+                return;
+            }
+            sr.sprite = bomb ? flagSprite : explodedFlagSprite;
+            return;
+        }
         if (!revealed) {
             sr.sprite = flagged ? flagSprite : startSprite;
             return;
@@ -70,7 +78,7 @@ public class Square : MonoBehaviour, IPointerClickHandler, IPointerDownHandler {
         Reveal();
     }
 
-    public void Reveal(bool gameOver = false) {
+    public void Reveal() {
         if (revealed) {
             return;
         }
@@ -85,19 +93,15 @@ public class Square : MonoBehaviour, IPointerClickHandler, IPointerDownHandler {
 
         GameManager.firstClick = false;
         if (bomb) {
-            if (!gameOver) {
-                exploded = true;
-                GameManager.instance.GameOver();
-            }
+            exploded = true;
+            GameManager.instance.GameOver();
             Refresh();
             return;
         }
         Refresh();
-        if (adjacent == 0 && !gameOver) {
+        if (adjacent == 0) {
             GameManager.instance.RevealAdjacent(pos);
         }
-        if (!gameOver) {
-            GameManager.instance.CheckWin();
-        }
+        GameManager.instance.CheckWin();
     }
 }
