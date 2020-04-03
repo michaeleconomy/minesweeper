@@ -26,8 +26,8 @@
      inkscape:pageopacity="0"
      inkscape:pageshadow="2"
      inkscape:zoom="1.4"
-     inkscape:cx="-164.41042"
-     inkscape:cy="880.04147"
+     inkscape:cx="-75.481849"
+     inkscape:cy="907.18433"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -435,5 +435,37 @@
        id="path1000"
        inkscape:connector-curvature="0"
        sodipodi:nodetypes="ccccc" />
+    <rect
+       inkscape:export-ydpi="96"
+       inkscape:export-xdpi="96"
+       style="opacity:1;vector-effect:none;fill:#e10000;fill-opacity:1;stroke:#2c2c2c;stroke-width:0.5291667;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect860"
+       width="17.976185"
+       height="19.579802"
+       x="79.37915"
+       y="-17.410364"
+       ry="0"
+       inkscape:tile-x0="5.718757"
+       inkscape:tile-y0="43.68613" />
+    <rect
+       y="-14.636287"
+       x="87.347763"
+       height="13.831198"
+       width="1.4031643"
+       id="rect862"
+       style="opacity:1;vector-effect:none;fill:#2c2c2c;fill-opacity:1;stroke:none;stroke-width:1.67799997;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
+    <path
+       sodipodi:nodetypes="cccc"
+       inkscape:connector-curvature="0"
+       id="path864"
+       d="m 87.347763,-14.636287 v 5.7462944 h -5.078121 z"
+       style="opacity:1;vector-effect:none;fill:#7f0202;fill-opacity:0.87167071;stroke:none;stroke-width:1.67799997;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
+    <rect
+       y="-1.1391745"
+       x="85.343246"
+       height="1.1358955"
+       width="5.3453903"
+       id="rect866"
+       style="opacity:1;vector-effect:none;fill:#2c2c2c;fill-opacity:1;stroke:none;stroke-width:1.67799997;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
   </g>
 </svg>
