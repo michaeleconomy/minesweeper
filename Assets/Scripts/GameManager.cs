@@ -9,6 +9,8 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour {
     public static GameManager instance;
+    public static bool firstClick = false;
+
     public Text clockText;
     public Square squarePrefab;
     public Transform squaresParent;
@@ -39,12 +41,12 @@ public class GameManager : MonoBehaviour {
         },
         new Difficulty {
             name = "Medium",
-            size = new Vector2Int(10, 16),
-            bombs = 30
+            size = new Vector2Int(10, 17),
+            bombs = 32
         },
         new Difficulty {
             name = "Hard",
-            size = new Vector2Int(10, 16),
+            size = new Vector2Int(10, 17),
             bombs = 50
         },
     };
@@ -55,6 +57,7 @@ public class GameManager : MonoBehaviour {
 
     public void NewGame(Difficulty difficulty) {
         time = 0;
+        firstClick = true;
         newGameButton.SetActive(false);
         highScoresButton.SetActive(false);
         var tempSquare = Instantiate(squarePrefab);
@@ -89,8 +92,8 @@ public class GameManager : MonoBehaviour {
             }
         }
         var camera = Camera.main;
-        var widthSize = (.1f + size.x * currentDifficulty.size.x) / (camera.aspect * 2);
-        var heightSize = (.1f + size.y * currentDifficulty.size.y) / 2;
+        var widthSize = ( size.x * currentDifficulty.size.x) / (camera.aspect * 2);
+        var heightSize = ( size.y * currentDifficulty.size.y) / 2;
         camera.orthographicSize = Mathf.Max(widthSize, heightSize);
         var canvas = Resources.FindObjectsOfTypeAll<Canvas>()[0];
         var height = (Screen.height - topBar.rect.height * canvas.scaleFactor) / Screen.height;
@@ -98,11 +101,26 @@ public class GameManager : MonoBehaviour {
         playing = true;
     }
 
-    //width = 50
-    //size = 2
-    // - 1 * 
-
-    /// == 25
+    public void ReassignBomb() {
+        while (true) {
+            var pos = new Vector2Int(
+                Rand.R(0, currentDifficulty.size.x),
+                Rand.R(0, currentDifficulty.size.y)
+            );
+            var square = squares[pos];
+            if (square.bomb || square.revealed) {
+                continue;
+            }
+            square.bomb = true;
+            foreach (var direction in directions) {
+                if (squares.TryGetValue(pos + direction, out var other)) {
+                    other.adjacent++;
+                    other.Refresh();
+                }
+            }
+            break;
+        }
+    }
 
     private void Update() {
         if (!playing) {

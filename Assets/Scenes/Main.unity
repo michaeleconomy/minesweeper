@@ -2042,6 +2042,7 @@ MonoBehaviour:
   squarePrefab: {fileID: 2705973326963996597, guid: d0eaa8735f7cb478bb5cd0a2419e40e4,
     type: 3}
   squaresParent: {fileID: 1811742098}
+  topBar: {fileID: 615371738}
   newGameButton: {fileID: 2013784188}
   highScoresButton: {fileID: 64357013}
   playing: 0

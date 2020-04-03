@@ -24,7 +24,7 @@ public class Square : MonoBehaviour, IPointerClickHandler, IPointerDownHandler {
         Refresh();
     }
 
-    private void Refresh() {
+    public void Refresh() {
         if (!revealed) {
             sr.sprite = flagged ? flagSprite : startSprite;
             return;
@@ -78,6 +78,12 @@ public class Square : MonoBehaviour, IPointerClickHandler, IPointerDownHandler {
             return;
         }
         revealed = true;
+        if (GameManager.firstClick && bomb) {
+            bomb = false;
+            GameManager.instance.ReassignBomb();
+        }
+
+        GameManager.firstClick = false;
         if (bomb) {
             if (!gameOver) {
                 exploded = true;
