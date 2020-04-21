@@ -6,6 +6,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.iOS;
 
 public class GameManager : MonoBehaviour {
     public static GameManager instance;
@@ -130,7 +131,7 @@ public class GameManager : MonoBehaviour {
         }
         time += Time.deltaTime;
         clockText.text = string.Format(CultureInfo.InvariantCulture,
-            "{0}:{1:00.00}", (int)time / 60, time % 60);
+            "{0}:{1:00.0}", (int)time / 60, time % 60);
     }
 
     public void GameOver() {
@@ -151,6 +152,9 @@ public class GameManager : MonoBehaviour {
             PlayerPrefs.SetFloat(currentDifficulty.name + "_score", time);
             DialogView.Prompt("New High Score!");
         }
+        if (currentDifficulty != difficulties[0]) {
+            PromptReview();
+        }
     }
 
     private bool Won() {
@@ -164,8 +168,40 @@ public class GameManager : MonoBehaviour {
 
     private void GameEnd() {
         newGameButton.SetActive(true);
+        foreach (var square in squares.Values) {
+            square.revealed = true;
+            square.Refresh();
+        }
         highScoresButton.SetActive(HighScores().Any());
         playing = false;
+    }
+
+    private bool PromptReview() {
+        if (PlayerPrefs.HasKey("promptedForReview")) {
+            return false;
+        }
+        PlayerPrefs.SetString("promptedForReview", "true");
+        DialogView.Show("Are you enjoying Mine Clearer?", new List<string> { "Yes", "No" },  (option) => {
+            if (option == 0) {
+#if UNITY_IOS
+                if (!Device.RequestStoreReview()) {
+                    DialogView.Prompt("Glad to hear it!");
+                }
+#elif UNITY_ANDROID
+                DialogView.Confirm("Would you care to write a review?", () => {
+                    Application.OpenURL("market://details?id=com.styrognome.minesweeper");
+                });
+#else
+                UIDialog.Alert("Glad to hear it!");
+#endif
+            }
+            else {
+                DialogView.Confirm("Would you like to send us feedback so we can improve?", () => {
+                    Application.OpenURL("http://www.styrognome.com/contact");
+                });
+            }
+        });
+        return true;
     }
 
     public List<HighScore> HighScores() {
