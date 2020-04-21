@@ -13,6 +13,7 @@ public class HighScoresView : MonoBehaviour {
             var scoreView = Instantiate(scoreViewPrefab, scores);
             scoreView.Initialize(score);
         }
+        gameObject.SetActive(true);
     }
 }
 
