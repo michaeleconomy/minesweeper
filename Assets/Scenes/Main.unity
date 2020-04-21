@@ -2189,8 +2189,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea9d9b072283a4967810274bb8be5b7c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scoreViewPrefab: {fileID: 0}
-  scores: {fileID: 3488655650009224060, guid: 0d07f360e2f604784a675136300a3b3c, type: 3}
+  scoreViewPrefab: {fileID: 2715188970088457260, guid: 0d07f360e2f604784a675136300a3b3c,
+    type: 3}
+  scores: {fileID: 244229833}
 --- !u!114 &2007665424
 MonoBehaviour:
   m_ObjectHideFlags: 0
